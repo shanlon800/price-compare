@@ -10,14 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180301235620) do
+ActiveRecord::Schema.define(version: 20180302032641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "prices", force: :cascade do |t|
+    t.float "price_amt", null: false
+    t.bigint "product_id"
+    t.bigint "website_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_prices_on_product_id"
+    t.index ["website_id"], name: "index_prices_on_website_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "product_name", null: false
+    t.string "amazon_asin"
+    t.string "walmart_id"
+    t.string "upc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "websites", force: :cascade do |t|
     t.string "website_name", null: false
-    t.string "website_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
