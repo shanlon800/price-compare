@@ -1,11 +1,14 @@
 import React from 'react'
-// import 'whatwg-fetch';
+
 import { Route, IndexRoute, Router, browserHistory } from 'react-router';
+import PriceIndexContainer from './containers/PriceIndexContainer'
 
 const App = props => {
   return(
     <div>
-      <h1>Hello World!</h1>
+      <Router history={browserHistory}>
+        <Route path='/' component={PriceIndexContainer}/>
+      </Router>
     </div>
   )
 }
