@@ -1,0 +1,24 @@
+// #flex-grid{
+//   display: flex;
+// }
+
+// #flex-grid .product-display-container {
+//   flex: 1;
+// }
+
+.product-display-container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 20rem;
+}
+
+.product-name{
+  flex: 0 0 33%;
+}
+.amazon-price{
+  flex: 0 0 33%;
+}
+.walmart-price{
+  flex: 0 0 33%;
+}
