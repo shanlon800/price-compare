@@ -10,15 +10,20 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 20rem;
+  width: 40rem;
+  margin-left: 4rem;
 }
 
 .product-name{
-  flex: 0 0 33%;
+  flex: 0 0 50%;
 }
 .amazon-price{
-  flex: 0 0 33%;
+  flex: 0 0 25%;
 }
 .walmart-price{
-  flex: 0 0 33%;
+  flex: 0 0 25%;
+}
+
+#new-product-form{
+  margin: 4rem;
 }
