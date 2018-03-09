@@ -43,9 +43,9 @@ class NewProductFormContainer extends Component {
 
   handleSubmit(event){
     event.preventDefault()
-    let errors = this.validateField(newProductName, 'Product Name')
-    errors = errors.concat(this.validateField(newProductAsin, 'ASIN'))
-    errors = errors.concat(this.validateField(newProductWalmartId, 'Walmart Id'))
+    let errors = this.validateField('newProductName', 'Product Name')
+    errors = errors.concat(this.validateField('newProductAsin', 'ASIN'))
+    errors = errors.concat(this.validateField('newProductWalmartId', 'Walmart Id'))
     if (errors.length === 0){
       let formPayload = {
         product_name: this.state.newProductName,
@@ -53,7 +53,7 @@ class NewProductFormContainer extends Component {
         walmart_id: this.state.newProductWalmartId,
         upc: this.state.newUpc
       }
-      this.props.addNewWorkout(formPayload)
+      this.props.addNewProduct(formPayload)
     } else {
       this.setState({errors: errors})
     }

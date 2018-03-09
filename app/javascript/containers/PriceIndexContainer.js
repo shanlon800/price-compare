@@ -9,7 +9,36 @@ class PriceIndexContainer extends Component {
     this.state = {
       products: []
     }
+    this.addNewProduct = this.addNewProduct.bind(this)
   }
+
+
+  addNewProduct(formPayload) {
+  fetch('/api/v1/products', {
+    credentials: 'same-origin',
+    method: 'POST',
+    body: JSON.stringify(formPayload),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(response => {
+    if (response.ok) {
+      return response;
+    } else {
+      let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+      throw(error);
+    }
+  })
+  .then(response => response.json())
+  .then(body => {
+    let existingProducts = this.state.products
+    let includeNewProduct = existingProducts.concat(body)
+    this.setState({
+      products: includeNewProduct
+    })
+  })
+  .catch(error => console.error(`Error in fetch: ${error.message}`));
+}
 
   componentWillMount() {
   fetch('/api/v1/websites')
@@ -54,7 +83,11 @@ class PriceIndexContainer extends Component {
         </div>
           {products}
         </div>
-        <NewProductFormContainer/>
+        <div id='new-product-form'>
+          <NewProductFormContainer
+            addNewProduct={this.addNewProduct}
+          />
+        </div>
       </div>
     )
   }
