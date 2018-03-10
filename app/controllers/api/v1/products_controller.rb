@@ -10,7 +10,9 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def show
-
+    product = Product.find(params[:id])
+    price_history = Price.where(product: product)
+    binding.pry
   end
 
   protected
