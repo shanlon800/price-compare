@@ -7,7 +7,10 @@ class Api::V1::ProductsController < ApplicationController
     else
       render json: { error: product.errors.full_messages }, status: :unprocessable_entity
     end
-    binding.pry
+  end
+
+  def show
+
   end
 
   protected

@@ -69,6 +69,7 @@ class PriceIndexContainer extends Component {
           amzPrice={product.amazon_price}
           walmartPrice={product.walmart_price}
           key={product.id}
+          id={product.id}
         />
       )
     })
