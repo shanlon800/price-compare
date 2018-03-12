@@ -28,7 +28,7 @@ class ProductShowContainer extends Component {
     .then(body => {
       this.setState({
         product: body.product,
-        priceHistory: body.scrape_history
+        priceHistory: body.pricing_data
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
