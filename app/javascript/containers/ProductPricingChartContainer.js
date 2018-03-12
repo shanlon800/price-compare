@@ -8,10 +8,11 @@ class ProductPricingChartContainer extends Component {
     this.state = {
       options: {
         title: 'Pricing Data Over Time',
-        hAxis: { title: 'Date', minValue: 0, maxValue: 20 },
-        vAxis: { minValue: 0, maxValue: 20 },
-        vAxis: { title: 'Price in $', minValue: 0, maxValue: 20 },
+        hAxis: { title: 'Date', minValue: 0, maxValue: 50 },
+        vAxis: { minValue: 0, maxValue: 50 },
+        vAxis: { title: 'Price in $', minValue: 0, maxValue: 50},
         legend: 'true',
+        pointSize: 5,
       },
       data: [
         ['Date', 'Walmart Price', 'Amazon Price'],
@@ -27,11 +28,18 @@ class ProductPricingChartContainer extends Component {
 
   render(){
     let chartArray = [['Date', 'Walmart price', 'Amazon Price']]
+    this.props.pricingData.forEach(scrape => {
+      let chartScrape = []
+      chartScrape.push(moment(scrape.created_at).format("MM/DD/YY"))
+      chartScrape.push(scrape.walmart_price_amt)
+      chartScrape.push(scrape.amazon_price_amt)
+      chartArray.push(chartScrape)
+    })
 
     return(
       <Chart
         chartType="LineChart"
-        data={this.state.data}
+        data={chartArray}
         options={this.state.options}
         graph_id="LineChart1"
         width="90%"
