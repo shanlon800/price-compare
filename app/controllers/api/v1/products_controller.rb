@@ -12,6 +12,7 @@ class Api::V1::ProductsController < ApplicationController
   def show
     product = Product.find(params[:id])
     price_history = Price.where(product: product)
+    # prices_no_zero = price_history.where("amazon_price > ? AND walmart_price > ?", 0, 0)
     binding.pry
   end
 
