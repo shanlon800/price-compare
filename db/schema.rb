@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180302032641) do
+ActiveRecord::Schema.define(version: 20180312005921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,19 @@ ActiveRecord::Schema.define(version: 20180302032641) do
     t.string "upc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "scrapes", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.float "amazon_price_amt"
+    t.integer "amazon_price_id"
+    t.float "walmart_price_amt"
+    t.integer "walmart_price_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["amazon_price_id"], name: "index_scrapes_on_amazon_price_id", unique: true
+    t.index ["product_id"], name: "index_scrapes_on_product_id"
+    t.index ["walmart_price_id"], name: "index_scrapes_on_walmart_price_id", unique: true
   end
 
   create_table "websites", force: :cascade do |t|

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
+import ProductPricingChartContainer from './ProductPricingChartContainer'
+
 class ProductShowContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
+      product: '',
       priceHistory: []
     }
   }
@@ -24,7 +27,8 @@ class ProductShowContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        priceHistory: body
+        product: body.product,
+        priceHistory: body.scrape_history
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -33,7 +37,12 @@ class ProductShowContainer extends Component {
 
   render(){
     return(
-      <h1>Hello from the Product Show Container</h1>
+      <div>
+        <h1>{this.state.product.product_name}</h1>
+        <ProductPricingChartContainer
+          pricingData={this.state.priceHistory}
+        />
+      </div>
     )
   }
 }
