@@ -10,6 +10,7 @@ class PriceIndexContainer extends Component {
       products: []
     }
     this.addNewProduct = this.addNewProduct.bind(this)
+    this.scrapeWebsites = this.scrapeWebsites.bind(this)
   }
 
 
@@ -60,6 +61,28 @@ class PriceIndexContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  scrapeWebsites(){
+    console.log('running price scrape')
+    fetch('/api/v1/scrapes')
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+              error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        this.setState({
+          products: body
+        })
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+
+    }
+
   render() {
 
     let products = this.state.products.map(product => {
@@ -76,6 +99,7 @@ class PriceIndexContainer extends Component {
     return(
       <div>
         <h1>List of Products</h1>
+        <button onClick={this.scrapeWebsites}>Run Price Check</button>
         <div id='flex-grid'>
         <div className='product-display-container'>
           <div className='product-name'>Product Name</div>

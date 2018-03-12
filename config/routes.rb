@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :websites, only: [:index]
       resources :products, only: [:create, :show]
+      resources :scrapes, only: [:index]
     end
   end
 end
